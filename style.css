@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+#radar {
+    position: relative;
+}
+#map-container {
+    position: relative;
+    overflow: hidden; 
+}
+#map {
+    display: block;
+    border: 2px solid black; 
+    background-color: black; 
+    position: relative;
+    z-index: 1; 
+}
+.map-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 0; 
+}
+.line {
+    position: absolute;
+    height: 4px;
+    background-color: yellow; 
+    transform-origin: top left;
+    z-index: 2; 
+}
+.heading {
+    position: absolute;
+    background-color: white;
+    padding: 2px 5px;
+    border: 1px solid black;
+    border-radius: 3px;
+    transform: translate(-50%, -50%);
+    z-index: 3; 
+}
