@@ -6,13 +6,17 @@ body {
     height: 100vh;
     background-color: #f0f0f0;
 }
+
 #radar {
     position: relative;
 }
+
 #map-container {
     position: relative;
     overflow: hidden; 
+    background-color: black; 
 }
+
 #map {
     display: block;
     border: 2px solid black; 
@@ -20,6 +24,7 @@ body {
     position: relative;
     z-index: 1; 
 }
+
 .map-background {
     position: absolute;
     top: 0;
@@ -29,6 +34,7 @@ body {
     background-color: black;
     z-index: 0; 
 }
+
 .line {
     position: absolute;
     height: 4px;
@@ -36,6 +42,7 @@ body {
     transform-origin: top left;
     z-index: 2; 
 }
+
 .heading {
     position: absolute;
     background-color: white;
