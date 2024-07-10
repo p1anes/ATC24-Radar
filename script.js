@@ -91,17 +91,19 @@ function displayHeadingText(angle, midX, midY) {
 
     let displayedAngle;
 
-    if (angle >= -45 && angle < 45) {
-        displayedAngle = 90; // Rightwards (090°)
-    } else if (angle >= 45 && angle < 135) {
-        displayedAngle = 180; // Downwards (180°)
-    } else if (angle >= 135 && angle < 225) {
-        displayedAngle = 270; // Leftwards (270°)
+    // Adjusting angle to fit compass direction
+    if (angle >= 0 && angle < 90) {
+        displayedAngle = 90 - angle; // Rightwards (090° to 000°)
+    } else if (angle >= 90 && angle < 180) {
+        displayedAngle = 450 - angle; // Downwards (180° to 090°)
+    } else if (angle >= 180 && angle < 270) {
+        displayedAngle = 270 - (angle - 180); // Leftwards (270° to 180°)
     } else {
-        displayedAngle = 0; // Upwards (360/000°)
+        displayedAngle = 90 + (360 - angle); // Upwards (360° to 270°)
     }
 
     headingText.textContent = `${padNumber(Math.round(displayedAngle))}°`;
     headingText.style.left = `${midX}px`;
     headingText.style.top = `${midY}px`;
 }
+
