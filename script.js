@@ -89,7 +89,6 @@ function displayHeadingText(angle, midX, midY) {
         radar.appendChild(headingText);
     }
 
-    // Determine compass direction based on angle
     let displayedAngle;
 
     if (angle >= -45 && angle < 45) {
@@ -106,6 +105,3 @@ function displayHeadingText(angle, midX, midY) {
     headingText.style.left = `${midX}px`;
     headingText.style.top = `${midY}px`;
 }
-
-
-
