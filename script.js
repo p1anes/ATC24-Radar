@@ -13,9 +13,9 @@ function removeExistingLineAndHeading() {
     }
 }
 
-
+// Prevent default drag behavior on the radar element
 radar.addEventListener('dragstart', (e) => {
-    e.preventDefault(); 
+    e.preventDefault(); // Prevent default drag behavior
 });
 
 radar.addEventListener('mousedown', (e) => {
@@ -27,13 +27,13 @@ radar.addEventListener('mousedown', (e) => {
     isDragging = true;
 
     line = document.createElement('div');
-    line.classList.add('line');
+    line.className = 'line';
     line.style.left = `${startX}px`;
     line.style.top = `${startY}px`;
     radar.appendChild(line);
 
     headingText = document.createElement('div');
-    headingText.classList.add('heading');
+    headingText.className = 'heading';
     radar.appendChild(headingText);
 });
 
@@ -51,13 +51,16 @@ radar.addEventListener('mousemove', (e) => {
     let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
 
     if (angle < 0) {
-        angle += 360; 
+        angle += 360;
     }
+
+    // Adjust the angle to get the correct heading
+    angle = (450 - angle) % 360;
 
     line.style.width = `${length}px`;
     line.style.transform = `rotate(${angle}deg)`;
 
-    
+    // Display heading text dynamically during drag
     displayHeadingText(angle, (startX + currentX) / 2, (startY + currentY) / 2);
 });
 
@@ -74,23 +77,20 @@ radar.addEventListener('mouseleave', () => {
     }
 });
 
-
+// Function to pad number to XXX format
 function padNumber(number) {
     return number.toString().padStart(3, '0');
 }
 
-
+// Function to dynamically display heading text during drag
 function displayHeadingText(angle, midX, midY) {
     if (!headingText) {
         headingText = document.createElement('div');
-        headingText.classList.add('heading');
+        headingText.className = 'heading';
         radar.appendChild(headingText);
     }
 
-    
-    let displayedAngle = (90 - angle + 360) % 360;
-
-    headingText.textContent = `${padNumber(Math.round(displayedAngle))}°`;
+    headingText.textContent = `${padNumber(Math.round(angle))}°`;
     headingText.style.left = `${midX}px`;
     headingText.style.top = `${midY}px`;
 }
