@@ -58,7 +58,9 @@ radar.addEventListener('mousemove', (e) => {
     angle = (90 - angle + 360) % 360;
 
     line.style.width = `${length}px`;
-    line.style.transform = `translate(${startX}px, ${startY}px) rotate(${angle}deg)`;
+    line.style.transform = `translate(${0}px, ${0}px) rotate(${angle}deg)`;
+    line.style.left = `${startX}px`;
+    line.style.top = `${startY}px`;
 
     displayHeadingText(angle, (startX + currentX) / 2, (startY + currentY) / 2);
 });
