@@ -36,11 +36,13 @@ body {
 
 .line {
     position: absolute;
-    height: 4px;
-    background-color: yellow; /* Change line color to yellow */
-    transform-origin: top left;
-    z-index: 2; /* Ensure line is above background */
+    height: 2px; /* Adjust line thickness as needed */
+    background-color: yellow; /* Change line color to yellow or desired color */
+    transform-origin: left center;
+    pointer-events: none; /* Ensure line does not interfere with mouse events */
+    z-index: 2; /* Ensure line is above the map background */
 }
+
 
 .heading {
     position: absolute;
