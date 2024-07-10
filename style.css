@@ -1,59 +1,30 @@
-body {
+body, html {
+    height: 100%;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
 }
 
-#radar {
-    position: relative;
-    width: 80%; /* Adjust width as needed */
-    height: 80vh; /* Adjust height as needed */
-    border: 2px solid black;
-    overflow: hidden; /* Ensure any overflow is hidden */
-}
-
-#map-container {
+.radar-container {
     position: relative;
     width: 100%;
     height: 100%;
-    overflow: hidden; /* Ensure any overflow is hidden */
+    overflow: hidden;
 }
 
-#map {
-    display: block;
+.radar-map {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Adjust as per your map size */
-}
-
-
-.map-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    z-index: 0; /* Ensure background is behind the map */
+    pointer-events: none; /* Ensures mouse events pass through to SVG */
 }
 
 .line {
-    position: absolute;
-    height: 4px;
-    background-color: yellow;
-    transform-origin: top left;
-    z-index: 2;
+    stroke: #00f;
+    stroke-width: 2;
+    fill: none;
 }
 
-.heading {
-    position: absolute;
-    background-color: white;
-    padding: 2px 5px;
-    border: 1px solid black;
-    border-radius: 3px;
-    transform: translate(-50%, -50%);
-    z-index: 3;
+.line-text {
+    font-size: 14px;
+    fill: #00f;
+    pointer-events: none;
 }
