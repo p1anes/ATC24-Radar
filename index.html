@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radar Interface</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATC Radar</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="radar-container">
-    <img src="map.png" alt="Map Background" class="radar-map" id="radarMap">
-    <svg id="lines"></svg>
-</div>
-<script src="script.js"></script>
+    <div id="radar">
+        <div id="map-container">
+            <div class="map-background"></div>
+            <img id="map" src="map.png" alt="Game Map">
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
