@@ -84,18 +84,8 @@ function displayHeadingText(angle, midX, midY) {
     headingText = document.createElement('div');
     headingText.classList.add('heading');
 
-    let displayedAngle;
-    if (angle >= 0 && angle < 90) {
-        displayedAngle = 90 - angle;
-    } else if (angle >= 90 && angle < 180) {
-        displayedAngle = 450 - angle; // 360 + 90 - angle
-    } else if (angle >= 180 && angle < 270) {
-        displayedAngle = 270 - (angle - 180);
-    } else if (angle >= 270 && angle < 360) {
-        displayedAngle = 90 - (angle - 270);
-    } else if (angle === 360) {
-        displayedAngle = 0; // Special case for 360 degrees
-    }
+    // Display heading text based on compass directions
+    let displayedAngle = (450 - angle) % 360;
 
     headingText.textContent = `${padNumber(Math.round(displayedAngle))}°`;
     headingText.style.left = `${midX}px`;
