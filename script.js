@@ -31,39 +31,40 @@ radar.addEventListener('mousedown', (e) => {
     line.style.left = `${startX}px`;
     line.style.top = `${startY}px`;
     radar.appendChild(line);
+
+    headingText = document.createElement('div');
+    headingText.className = 'heading';
+    radar.appendChild(headingText);
 });
 
 radar.addEventListener('mousemove', (e) => {
-    if (isDragging && line) {
-        const rect = radar.getBoundingClientRect();
-        const currentX = e.clientX - rect.left;
-        const currentY = e.clientY - rect.top;
+    if (!isDragging) return;
 
-        const deltaX = currentX - startX;
-        const deltaY = currentY - startY;
+    const rect = radar.getBoundingClientRect();
+    const currentX = e.clientX - rect.left;
+    const currentY = e.clientY - rect.top;
 
-        const length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+    const deltaX = currentX - startX;
+    const deltaY = currentY - startY;
 
-        if (angle < 0) {
-            angle += 360;
-        }
+    const length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
 
-        // Adjust the angle to get the correct heading
-        let headingAngle = (90 - angle + 360) % 360;
-
-        line.style.width = `${length}px`;
-        line.style.transform = `translate(${startX}px, ${startY}px) rotate(${headingAngle}deg)`;
-
-        // Display heading text dynamically during drag
-        displayHeadingText(headingAngle, (startX + currentX) / 2, (startY + currentY) / 2);
+    if (angle < 0) {
+        angle += 360;
     }
+
+    angle = (90 - angle + 360) % 360;
+
+    line.style.width = `${length}px`;
+    line.style.transform = `translate(${startX}px, ${startY}px) rotate(${angle}deg)`;
+
+    displayHeadingText(angle, (startX + currentX) / 2, (startY + currentY) / 2);
 });
 
 radar.addEventListener('mouseup', () => {
     if (isDragging) {
         isDragging = false;
-        removeExistingLineAndHeading();
     }
 });
 
@@ -74,12 +75,10 @@ radar.addEventListener('mouseleave', () => {
     }
 });
 
-// Function to pad number to XXX format
 function padNumber(number) {
     return number.toString().padStart(3, '0');
 }
 
-// Function to dynamically display heading text during drag
 function displayHeadingText(angle, midX, midY) {
     if (!headingText) {
         headingText = document.createElement('div');
@@ -87,8 +86,7 @@ function displayHeadingText(angle, midX, midY) {
         radar.appendChild(headingText);
     }
 
-    // Adjust angle to match desired display convention
-    let displayAngle = (450 - angle) % 360; // 90 becomes 360, 0 remains 0, etc.
+    let displayAngle = (450 - angle) % 360;
 
     headingText.textContent = `${padNumber(Math.round(displayAngle))}°`;
     headingText.style.left = `${midX}px`;
