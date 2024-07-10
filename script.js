@@ -86,14 +86,10 @@ function displayHeadingText(angle, midX, midY) {
 
     // Calculate the correct heading based on the mouse movement
     let displayedAngle;
-    if (angle >= 0 && angle < 90) {
-        displayedAngle = 90 - angle;
-    } else if (angle >= 90 && angle < 180) {
-        displayedAngle = 360 - (angle - 90);
-    } else if (angle >= 180 && angle < 270) {
-        displayedAngle = 270 - (angle - 180);
-    } else if (angle >= 270 && angle < 360) {
-        displayedAngle = 180 - (angle - 270);
+    if (angle >= 0 && angle < 180) {
+        displayedAngle = 180 - angle;
+    } else if (angle >= 180 && angle < 360) {
+        displayedAngle = 540 - angle;
     } else if (angle === 360 || angle === 0) {
         displayedAngle = 0; // Special case for 360 or 0 degrees
     }
