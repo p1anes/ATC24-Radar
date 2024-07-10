@@ -13,9 +13,9 @@ function removeExistingLineAndHeading() {
     }
 }
 
-// Prevent default drag behavior on the radar element
+
 radar.addEventListener('dragstart', (e) => {
-    e.preventDefault(); // Prevent default drag behavior
+    e.preventDefault(); 
 });
 
 radar.addEventListener('mousedown', (e) => {
@@ -41,19 +41,19 @@ radar.addEventListener('mousemove', (e) => {
     const currentY = e.clientY - rect.top;
 
     const deltaX = currentX - startX;
-    const deltaY = currentY - startY; // Correct direction
+    const deltaY = currentY - startY;
 
     const length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
     let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
 
     if (angle < 0) {
-        angle += 360; // Convert angle to positive if it's negative
+        angle += 360; 
     }
 
     line.style.width = `${length}px`;
-    line.style.transform = `rotate(${angle}deg)`; // Correct rotation
+    line.style.transform = `rotate(${angle}deg)`; 
 
-    // Display heading text dynamically during drag
+    
     displayHeadingText(angle, (startX + currentX) / 2, (startY + currentY) / 2);
 });
 
@@ -70,12 +70,12 @@ radar.addEventListener('mouseleave', () => {
     }
 });
 
-// Function to pad number to XXX format
+
 function padNumber(number) {
     return number.toString().padStart(3, '0');
 }
 
-// Function to dynamically display heading text during drag
+
 function displayHeadingText(angle, midX, midY) {
     if (headingText) {
         radar.removeChild(headingText);
@@ -84,7 +84,7 @@ function displayHeadingText(angle, midX, midY) {
     headingText = document.createElement('div');
     headingText.classList.add('heading');
 
-    // Display heading text based on compass directions
+    
     let displayedAngle = (450 - angle) % 360;
 
     headingText.textContent = `${padNumber(Math.round(displayedAngle))}°`;
