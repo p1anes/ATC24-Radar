@@ -31,6 +31,10 @@ radar.addEventListener('mousedown', (e) => {
     line.style.left = `${startX}px`;
     line.style.top = `${startY}px`;
     radar.appendChild(line);
+
+    headingText = document.createElement('div');
+    headingText.classList.add('heading');
+    radar.appendChild(headingText);
 });
 
 radar.addEventListener('mousemove', (e) => {
@@ -41,7 +45,7 @@ radar.addEventListener('mousemove', (e) => {
     const currentY = e.clientY - rect.top;
 
     const deltaX = currentX - startX;
-    const deltaY = currentY - startY; 
+    const deltaY = currentY - startY;
 
     const length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
     let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
@@ -51,7 +55,7 @@ radar.addEventListener('mousemove', (e) => {
     }
 
     line.style.width = `${length}px`;
-    line.style.transform = `rotate(${angle}deg)`; 
+    line.style.transform = `rotate(${angle}deg)`;
 
     
     displayHeadingText(angle, (startX + currentX) / 2, (startY + currentY) / 2);
@@ -77,28 +81,16 @@ function padNumber(number) {
 
 
 function displayHeadingText(angle, midX, midY) {
-    if (headingText) {
-        radar.removeChild(headingText);
+    if (!headingText) {
+        headingText = document.createElement('div');
+        headingText.classList.add('heading');
+        radar.appendChild(headingText);
     }
 
-    headingText = document.createElement('div');
-    headingText.classList.add('heading');
-
-    let displayedAngle;
-    if (angle >= 0 && angle < 90) {
-        displayedAngle = 90 - angle;
-    } else if (angle >= 90 && angle < 180) {
-        displayedAngle = 450 - angle; 
-    } else if (angle >= 180 && angle < 270) {
-        displayedAngle = 270 - (angle - 180);
-    } else if (angle >= 270 && angle < 360) {
-        displayedAngle = 90 - (angle - 270);
-    } else if (angle === 360) {
-        displayedAngle = 0; 
-    }
+    
+    let displayedAngle = (90 - angle + 360) % 360;
 
     headingText.textContent = `${padNumber(Math.round(displayedAngle))}°`;
     headingText.style.left = `${midX}px`;
     headingText.style.top = `${midY}px`;
-    radar.appendChild(headingText);
 }
