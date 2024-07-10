@@ -90,10 +90,11 @@ function displayHeadingText(angle, midX, midY) {
     }
 
     // Adjusting angle to fit compass direction
-    let displayedAngle = (90 - angle + 360) % 360;
+    let displayedAngle = (450 - angle) % 360;
 
     headingText.textContent = `${padNumber(Math.round(displayedAngle))}°`;
     headingText.style.left = `${midX}px`;
     headingText.style.top = `${midY}px`;
 }
+
 
