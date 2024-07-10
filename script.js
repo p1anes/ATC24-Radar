@@ -58,7 +58,7 @@ radar.addEventListener('mousemove', (e) => {
     angle = (90 - angle + 360) % 360;
 
     line.style.width = `${length}px`;
-    line.style.transform = `translate(${startX}px, ${startY}px) rotate(${-angle}deg)`;
+    line.style.transform = `translate(${startX}px, ${startY}px) rotate(${angle}deg)`;
 
     // Display heading text dynamically during drag
     displayHeadingText(angle, (startX + currentX) / 2, (startY + currentY) / 2);
@@ -90,7 +90,10 @@ function displayHeadingText(angle, midX, midY) {
         radar.appendChild(headingText);
     }
 
-    headingText.textContent = `${padNumber(Math.round(angle))}°`;
+    // Adjust angle to match desired display convention
+    let displayAngle = (450 - angle) % 360; // 90 becomes 360, 0 remains 0, etc.
+
+    headingText.textContent = `${padNumber(Math.round(displayAngle))}°`;
     headingText.style.left = `${midX}px`;
     headingText.style.top = `${midY}px`;
 }
