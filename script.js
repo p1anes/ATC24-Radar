@@ -9,9 +9,9 @@ function removeExistingHeading() {
     }
 }
 
-
+// Prevent default drag behavior on the radar element
 radar.addEventListener('dragstart', (e) => {
-    e.preventDefault(); 
+    e.preventDefault(); // Prevent default drag behavior
 });
 
 radar.addEventListener('mousedown', (e) => {
@@ -43,10 +43,10 @@ radar.addEventListener('mousemove', (e) => {
         angle += 360;
     }
 
-    
+    // Adjust the angle to get the correct heading
     angle = (450 - angle) % 360;
 
-    
+    // Display heading text dynamically during drag
     displayHeadingText(angle, (startX + currentX) / 2, (startY + currentY) / 2);
 });
 
@@ -63,12 +63,12 @@ radar.addEventListener('mouseleave', () => {
     }
 });
 
-
+// Function to pad number to XXX format
 function padNumber(number) {
     return number.toString().padStart(3, '0');
 }
 
-
+// Function to dynamically display heading text during drag
 function displayHeadingText(angle, midX, midY) {
     if (!headingText) {
         headingText = document.createElement('div');
