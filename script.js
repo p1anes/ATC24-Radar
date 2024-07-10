@@ -40,14 +40,11 @@ radar.addEventListener('mousemove', (e) => {
     let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
 
     if (angle < 0) {
-        angle += 360; // Convert angle to positive if negative
-    }
-
-    // Convert angle to compass heading (0° to 360° clockwise)
-    angle = 360 - angle;
-    if (angle < 0) {
         angle += 360;
     }
+
+    // Adjust the angle to get the correct heading
+    angle = (450 - angle) % 360;
 
     // Display heading text dynamically during drag
     displayHeadingText(angle, (startX + currentX) / 2, (startY + currentY) / 2);

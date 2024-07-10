@@ -11,14 +11,14 @@ body {
 }
 #map-container {
     position: relative;
-    overflow: hidden; 
+    overflow: hidden; /* Ensure any overflow is hidden */
 }
 #map {
     display: block;
-    border: 2px solid black;
-    background-color: black; 
+    border: 2px solid black; /* Add black border to map */
+    background-color: black; /* Set background color to black */
     position: relative;
-    z-index: 1; 
+    z-index: 1; /* Ensure map is on top of background */
 }
 .map-background {
     position: absolute;
@@ -27,14 +27,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: black;
-    z-index: 0; 
-}
-.line {
-    position: absolute;
-    height: 4px;
-    background-color: yellow; 
-    transform-origin: top left;
-    z-index: 2; 
+    z-index: 0; /* Ensure background is behind the map */
 }
 .heading {
     position: absolute;
@@ -43,5 +36,5 @@ body {
     border: 1px solid black;
     border-radius: 3px;
     transform: translate(-50%, -50%);
-    z-index: 3; 
+    z-index: 3; /* Ensure heading is above everything */
 }
