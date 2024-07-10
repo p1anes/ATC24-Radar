@@ -53,8 +53,15 @@ radar.addEventListener('mousemove', (e) => {
     line.style.width = `${length}px`;
     line.style.transform = `rotate(${angle}deg)`;
 
+    // Calculate displayed angle relative to the vertical line (0 degrees)
+    let displayedAngle = (angle + 90) % 360; // Shift by 90 degrees to start from the top
+
+    if (displayedAngle < 0) {
+        displayedAngle += 360;
+    }
+
     // Display heading text dynamically during drag
-    displayHeadingText(angle, (startX + currentX) / 2, (startY + currentY) / 2);
+    displayHeadingText(displayedAngle, (startX + currentX) / 2, (startY + currentY) / 2);
 });
 
 radar.addEventListener('mouseup', () => {
@@ -84,21 +91,7 @@ function displayHeadingText(angle, midX, midY) {
     headingText = document.createElement('div');
     headingText.classList.add('heading');
 
-    // Calculate the correct heading based on the mouse movement
-    let displayedAngle;
-    if (angle >= 0 && angle < 90) {
-        displayedAngle = 90 - angle;
-    } else if (angle >= 90 && angle < 180) {
-        displayedAngle = 450 - angle; // 360 + 90 - angle
-    } else if (angle >= 180 && angle < 270) {
-        displayedAngle = 270 - (angle - 180);
-    } else if (angle >= 270 && angle < 360) {
-        displayedAngle = 90 - (angle - 270);
-    } else if (angle === 360 || angle === 0) {
-        displayedAngle = 0; // Special case for 360 or 0 degrees
-    }
-
-    headingText.textContent = `${padNumber(Math.round(displayedAngle))}°`;
+    headingText.textContent = `${padNumber(Math.round(angle))}°`;
     headingText.style.left = `${midX}px`;
     headingText.style.top = `${midY}px`;
     radar.appendChild(headingText);
