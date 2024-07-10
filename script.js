@@ -89,12 +89,23 @@ function displayHeadingText(angle, midX, midY) {
         radar.appendChild(headingText);
     }
 
-    // Adjusting angle to fit compass direction
-    let displayedAngle = (450 - angle) % 360;
+    // Determine compass direction based on angle
+    let displayedAngle;
+
+    if (angle >= -45 && angle < 45) {
+        displayedAngle = 90; // Rightwards (090°)
+    } else if (angle >= 45 && angle < 135) {
+        displayedAngle = 180; // Downwards (180°)
+    } else if (angle >= 135 && angle < 225) {
+        displayedAngle = 270; // Leftwards (270°)
+    } else {
+        displayedAngle = 0; // Upwards (360/000°)
+    }
 
     headingText.textContent = `${padNumber(Math.round(displayedAngle))}°`;
     headingText.style.left = `${midX}px`;
     headingText.style.top = `${midY}px`;
 }
+
 
 
