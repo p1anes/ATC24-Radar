@@ -41,7 +41,7 @@ radar.addEventListener('mousemove', (e) => {
     const currentY = e.clientY - rect.top;
 
     const deltaX = currentX - startX;
-    const deltaY = startY - currentY; 
+    const deltaY = currentY - startY; 
 
     const length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
     let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
@@ -86,6 +86,7 @@ function displayHeadingText(angle, midX, midY) {
 
     
     let displayedAngle = (450 - angle) % 360;
+    displayedAngle = (displayedAngle + 90) % 360; 
 
     headingText.textContent = `${padNumber(Math.round(displayedAngle))}°`;
     headingText.style.left = `${midX}px`;
