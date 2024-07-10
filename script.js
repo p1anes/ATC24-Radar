@@ -1,4 +1,4 @@
-// this script is made by p1anes, running off hopes, dreams, and prayers
+// made by p1anes running off hopes, dreams, and prayers
 
 const radar = document.getElementById('radar');
 let isDragging = false;
@@ -33,6 +33,10 @@ radar.addEventListener('mousedown', (e) => {
     line.style.left = `${startX}px`;
     line.style.top = `${startY}px`;
     radar.appendChild(line);
+
+    headingText = document.createElement('div');
+    headingText.classList.add('heading');
+    radar.appendChild(headingText);
 });
 
 radar.addEventListener('mousemove', (e) => {
@@ -43,7 +47,7 @@ radar.addEventListener('mousemove', (e) => {
     const currentY = e.clientY - rect.top;
 
     const deltaX = currentX - startX;
-    const deltaY = currentY - startY; // Correct direction
+    const deltaY = currentY - startY;
 
     const length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
     let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
@@ -52,16 +56,46 @@ radar.addEventListener('mousemove', (e) => {
         angle += 360; // Convert angle to positive if it's negative
     }
 
+    // Adjust the angle to match compass headings
+    let adjustedAngle = (angle + 90) % 360;
+
     line.style.width = `${length}px`;
-    line.style.transform = `rotate(${angle}deg)`; // Correct rotation
+    line.style.transformOrigin = '0 0'; // Ensure the rotation origin is at the start of the line
+    line.style.transform = `rotate(${angle}deg)`; // Use original angle for rotation
 
     // Display heading text dynamically during drag
-    displayHeadingText(angle, (startX + currentX) / 2, (startY + currentY) / 2);
+    const midX = (startX + currentX) / 2;
+    const midY = (startY + currentY) / 2;
+    displayHeadingText(adjustedAngle, midX, midY);
 });
 
-radar.addEventListener('mouseup', () => {
+radar.addEventListener('mouseup', (e) => {
     if (isDragging) {
         isDragging = false;
+
+        const rect = radar.getBoundingClientRect();
+        const endX = e.clientX - rect.left;
+        const endY = e.clientY - rect.top;
+
+        const deltaX = endX - startX;
+        const deltaY = endY - startY;
+
+        let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+
+        if (angle < 0) {
+            angle += 360; // Convert angle to positive if it's negative
+        }
+
+        // Adjust the angle to match compass headings
+        let adjustedAngle = (angle + 90) % 360;
+
+        // Display heading text in XXX format
+        const midX = (startX + endX) / 2;
+        const midY = (startY + endY) / 2;
+
+        headingText.textContent = `${padNumber(Math.round(adjustedAngle))}°`; // Pad number to XXX format
+        headingText.style.left = `${midX}px`;
+        headingText.style.top = `${midY}px`;
     }
 });
 
@@ -78,31 +112,14 @@ function padNumber(number) {
 }
 
 // Function to dynamically display heading text during drag
-function displayHeadingText(angle, midX, midY) {
+function displayHeadingText(angle, x, y) {
     if (headingText) {
-        radar.removeChild(headingText);
+        headingText.style.left = `${x}px`;
+        headingText.style.top = `${y}px`;
+
+        // Ensure angle is positive and within 0 to 360 degrees
+        angle = (angle + 360) % 360;
+
+        headingText.textContent = `${padNumber(Math.round(angle))}°`; // Update heading text
     }
-
-    headingText = document.createElement('div');
-    headingText.classList.add('heading');
-
-    let displayedAngle;
-    if (angle >= 0 && angle < 90) {
-        displayedAngle = 90 - angle;
-    } else if (angle >= 90 && angle < 180) {
-        displayedAngle = 450 - angle; // 360 + 90 - angle
-    } else if (angle >= 180 && angle < 270) {
-        displayedAngle = 270 - (angle - 180);
-    } else if (angle >= 270 && angle < 360) {
-        displayedAngle = 90 - (angle - 270);
-    } else if (angle === 360) {
-        displayedAngle = 0; // Special case for 360 degrees
-    }
-
-    headingText.textContent = `${padNumber(Math.round(displayedAngle))}°`;
-    headingText.style.left = `${midX}px`;
-    headingText.style.top = `${midY}px`;
-    radar.appendChild(headingText);
 }
-
-
