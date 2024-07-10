@@ -6,13 +6,16 @@ body {
     height: 100vh;
     background-color: #f0f0f0;
 }
+
 #radar {
     position: relative;
 }
+
 #map-container {
     position: relative;
     overflow: hidden; /* Ensure any overflow is hidden */
 }
+
 #map {
     display: block;
     border: 2px solid black; /* Add black border to map */
@@ -20,6 +23,7 @@ body {
     position: relative;
     z-index: 1; /* Ensure map is on top of background */
 }
+
 .map-background {
     position: absolute;
     top: 0;
@@ -29,6 +33,15 @@ body {
     background-color: black;
     z-index: 0; /* Ensure background is behind the map */
 }
+
+.line {
+    position: absolute;
+    height: 4px;
+    background-color: yellow; /* Change line color to yellow */
+    transform-origin: top left;
+    z-index: 2; /* Ensure line is above background */
+}
+
 .heading {
     position: absolute;
     background-color: white;
