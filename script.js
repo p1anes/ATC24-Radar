@@ -55,7 +55,7 @@ radar.addEventListener('mousemove', (e) => {
     }
 
     // Adjust the angle to get the correct heading
-    angle = (450 - angle) % 360;
+    angle = (90 - angle + 360) % 360;
 
     line.style.width = `${length}px`;
     line.style.transform = `translate(${startX}px, ${startY}px) rotate(${angle}deg)`;
@@ -67,13 +67,14 @@ radar.addEventListener('mousemove', (e) => {
 radar.addEventListener('mouseup', () => {
     if (isDragging) {
         isDragging = false;
+        removeExistingLineAndHeading(); // Remove line and heading on mouseup
     }
 });
 
 radar.addEventListener('mouseleave', () => {
     if (isDragging) {
         isDragging = false;
-        removeExistingLineAndHeading();
+        removeExistingLineAndHeading(); // Remove line and heading on mouseleave
     }
 });
 
@@ -90,7 +91,10 @@ function displayHeadingText(angle, midX, midY) {
         radar.appendChild(headingText);
     }
 
-    headingText.textContent = `${padNumber(Math.round(angle))}°`;
+    // Adjust angle to match desired display convention
+    let displayAngle = (450 - angle) % 360; // 90 becomes 360, 0 remains 0, etc.
+
+    headingText.textContent = `${padNumber(Math.round(displayAngle))}°`;
     headingText.style.left = `${midX}px`;
     headingText.style.top = `${midY}px`;
 }
