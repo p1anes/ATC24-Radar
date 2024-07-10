@@ -33,10 +33,6 @@ radar.addEventListener('mousedown', (e) => {
     line.style.left = `${startX}px`;
     line.style.top = `${startY}px`;
     radar.appendChild(line);
-
-    headingText = document.createElement('div');
-    headingText.classList.add('heading');
-    radar.appendChild(headingText);
 });
 
 radar.addEventListener('mousemove', (e) => {
@@ -47,7 +43,7 @@ radar.addEventListener('mousemove', (e) => {
     const currentY = e.clientY - rect.top;
 
     const deltaX = currentX - startX;
-    const deltaY = currentY - startY;
+    const deltaY = currentY - startY; // Correct direction
 
     const length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
     let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
@@ -57,7 +53,7 @@ radar.addEventListener('mousemove', (e) => {
     }
 
     line.style.width = `${length}px`;
-    line.style.transform = `rotate(${angle}deg)`;
+    line.style.transform = `rotate(${angle}deg)`; // Correct rotation
 
     // Display heading text dynamically during drag
     displayHeadingText(angle, (startX + currentX) / 2, (startY + currentY) / 2);
@@ -83,28 +79,30 @@ function padNumber(number) {
 
 // Function to dynamically display heading text during drag
 function displayHeadingText(angle, midX, midY) {
-    if (!headingText) {
-        headingText = document.createElement('div');
-        headingText.classList.add('heading');
-        radar.appendChild(headingText);
+    if (headingText) {
+        radar.removeChild(headingText);
     }
 
-    let displayedAngle;
+    headingText = document.createElement('div');
+    headingText.classList.add('heading');
 
-    // Adjusting angle to fit compass direction
-    if (angle >= -45 && angle < 45) {
-        displayedAngle = 90 - angle; // Rightwards (090° to 000°)
-    } else if (angle >= 45 && angle < 135) {
-        displayedAngle = 180 - (angle - 45); // Downwards (180° to 090°)
-    } else if (angle >= 135 && angle < 225) {
-        displayedAngle = 270 - (angle - 135); // Leftwards (270° to 180°)
-    } else {
-        displayedAngle = 360 - (angle - 225); // Upwards (360° to 270°)
+    let displayedAngle;
+    if (angle >= 0 && angle < 90) {
+        displayedAngle = 90 - angle;
+    } else if (angle >= 90 && angle < 180) {
+        displayedAngle = 450 - angle; // 360 + 90 - angle
+    } else if (angle >= 180 && angle < 270) {
+        displayedAngle = 270 - (angle - 180);
+    } else if (angle >= 270 && angle < 360) {
+        displayedAngle = 90 - (angle - 270);
+    } else if (angle === 360) {
+        displayedAngle = 0; // Special case for 360 degrees
     }
 
     headingText.textContent = `${padNumber(Math.round(displayedAngle))}°`;
     headingText.style.left = `${midX}px`;
     headingText.style.top = `${midY}px`;
+    radar.appendChild(headingText);
 }
 
 
