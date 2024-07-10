@@ -34,39 +34,13 @@ radar.addEventListener('mousedown', (e) => {
 });
 
 radar.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-
-    const rect = radar.getBoundingClientRect();
-    const currentX = e.clientX - rect.left;
-    const currentY = e.clientY - rect.top;
-
-    const deltaX = currentX - startX;
-    const deltaY = currentY - startY;
-
-    const length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-    let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-
-    if (angle < 0) {
-        angle += 360;
-    }
-
-    // Adjust the angle to get the correct heading
-    let headingAngle = (90 - angle + 360) % 360;
-
-    line.style.width = `${length}px`;
-    line.style.transform = `translate(${startX}px, ${startY}px) rotate(${headingAngle}deg)`;
-});
-
-radar.addEventListener('mouseup', (e) => {
-    if (isDragging) {
-        isDragging = false;
-
+    if (isDragging && line) {
         const rect = radar.getBoundingClientRect();
-        const endX = e.clientX - rect.left;
-        const endY = e.clientY - rect.top;
+        const currentX = e.clientX - rect.left;
+        const currentY = e.clientY - rect.top;
 
-        const deltaX = endX - startX;
-        const deltaY = endY - startY;
+        const deltaX = currentX - startX;
+        const deltaY = currentY - startY;
 
         const length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
         let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
@@ -82,7 +56,14 @@ radar.addEventListener('mouseup', (e) => {
         line.style.transform = `translate(${startX}px, ${startY}px) rotate(${headingAngle}deg)`;
 
         // Display heading text dynamically during drag
-        displayHeadingText(headingAngle, (startX + endX) / 2, (startY + endY) / 2);
+        displayHeadingText(headingAngle, (startX + currentX) / 2, (startY + currentY) / 2);
+    }
+});
+
+radar.addEventListener('mouseup', () => {
+    if (isDragging) {
+        isDragging = false;
+        removeExistingLineAndHeading();
     }
 });
 

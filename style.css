@@ -36,10 +36,10 @@ body {
 
 .line {
     position: absolute;
-    height: 4px;
-    background-color: yellow; /* Change line color to yellow */
+    height: 4px; /* Adjust line thickness as needed */
+    background-color: yellow; /* Change line color as needed */
     transform-origin: top left;
-    z-index: 2; /* Ensure line is above background */
+    z-index: 2;
 }
 
 .heading {
@@ -49,5 +49,5 @@ body {
     border: 1px solid black;
     border-radius: 3px;
     transform: translate(-50%, -50%);
-    z-index: 3; /* Ensure heading is above everything */
+    z-index: 3;
 }
