@@ -9,9 +9,8 @@ body {
 
 #radar {
     position: relative;
-    width: 80%;
-    height: 80vh;
-    border: 2px solid black;
+    width: 100vw; /* Set to full viewport width */
+    height: 100vh; /* Set to full viewport height */
     overflow: hidden;
 }
 
@@ -19,14 +18,13 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
-    overflow: hidden;
 }
 
 #map {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover; /* Ensure the image covers the entire container */
 }
 
 .line {
