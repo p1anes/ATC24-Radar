@@ -33,6 +33,10 @@ radar.addEventListener('mousedown', (e) => {
     line.style.left = `${startX}px`;
     line.style.top = `${startY}px`;
     radar.appendChild(line);
+
+    headingText = document.createElement('div');
+    headingText.classList.add('heading');
+    radar.appendChild(headingText);
 });
 
 radar.addEventListener('mousemove', (e) => {
@@ -79,12 +83,11 @@ function padNumber(number) {
 
 
 function displayHeadingText(angle, midX, midY) {
-    if (headingText) {
-        radar.removeChild(headingText);
+    if (!headingText) {
+        headingText = document.createElement('div');
+        headingText.classList.add('heading');
+        radar.appendChild(headingText);
     }
-
-    headingText = document.createElement('div');
-    headingText.classList.add('heading');
 
     
     let displayedAngle = (450 - angle) % 360;
@@ -92,5 +95,5 @@ function displayHeadingText(angle, midX, midY) {
     headingText.textContent = `${padNumber(Math.round(displayedAngle))}°`;
     headingText.style.left = `${midX}px`;
     headingText.style.top = `${midY}px`;
-    radar.appendChild(headingText);
 }
+
