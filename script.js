@@ -54,6 +54,7 @@ radar.addEventListener('mousemove', (e) => {
         angle += 360;
     }
 
+    // Adjust the angle to get the correct heading
     angle = (90 - angle + 360) % 360;
 
     line.style.width = `${length}px`;
@@ -86,7 +87,7 @@ function displayHeadingText(angle, midX, midY) {
         radar.appendChild(headingText);
     }
 
-    let displayAngle = (450 - angle) % 360;
+    let displayAngle = (angle + 360) % 360; // Adjust for display
 
     headingText.textContent = `${padNumber(Math.round(displayAngle))}°`;
     headingText.style.left = `${midX}px`;

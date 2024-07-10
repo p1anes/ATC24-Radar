@@ -9,20 +9,26 @@ body {
 
 #radar {
     position: relative;
+    width: 80%; /* Adjust width as needed */
+    height: 80vh; /* Adjust height as needed */
+    border: 2px solid black;
+    overflow: hidden; /* Ensure any overflow is hidden */
 }
 
 #map-container {
     position: relative;
+    width: 100%;
+    height: 100%;
     overflow: hidden; /* Ensure any overflow is hidden */
 }
 
 #map {
     display: block;
-    border: 2px solid black; /* Add black border to map */
-    background-color: black; /* Set background color to black */
-    position: relative;
-    z-index: 1; /* Ensure map is on top of background */
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Adjust as per your map size */
 }
+
 
 .map-background {
     position: absolute;
@@ -36,8 +42,8 @@ body {
 
 .line {
     position: absolute;
-    height: 4px; /* Adjust line thickness as needed */
-    background-color: yellow; /* Change line color as needed */
+    height: 4px;
+    background-color: yellow;
     transform-origin: top left;
     z-index: 2;
 }
