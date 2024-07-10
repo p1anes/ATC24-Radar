@@ -55,10 +55,10 @@ radar.addEventListener('mousemove', (e) => {
     }
 
     // Adjust the angle to get the correct heading
-    angle = (90 - angle + 360) % 360;
+    angle = (450 - angle) % 360;
 
     line.style.width = `${length}px`;
-    line.style.transform = `rotate(${angle}deg) translate(-50%, -50%)`;
+    line.style.transform = `translate(${startX}px, ${startY}px) rotate(${angle}deg)`;
 
     // Display heading text dynamically during drag
     displayHeadingText(angle, (startX + currentX) / 2, (startY + currentY) / 2);

@@ -38,7 +38,7 @@ body {
     position: absolute;
     height: 4px;
     background-color: yellow; /* Change line color to yellow */
-    transform-origin: 0 0;
+    transform-origin: top left;
     z-index: 2; /* Ensure line is above background */
 }
 
