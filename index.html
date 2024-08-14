@@ -5,14 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ATC Radar</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Modal HTML -->
+    <div id="info-modal">
+        <div class="modal-content">
+            <h2>Made by p1anez</h2>
+            <div class="controls">
+                <strong>Controls:</strong>
+                <ul>
+                    <li>Left-click and drag for heading tool.</li>
+                    <li>Right-click and drag for distance tool.</li>
+                </ul>
+            </div>
+            <div class="information">
+                <strong>Information:</strong>
+                <ul>
+                    <li>Some Fixes have been removed to make space for the approach lines.</li>
+                    <li>On the approach lines, the first line indicates the aircraft should be at 1000FT, the second line indicates the aircraft should be at 500FT. Except for McConnell AFB, where the lines for all runways indicate 500FT.</li>
+                    <li>Data for approach lines have been retrieved from most accurate charts, approach lines without altitude indicators either: Don't have any data, Various charts, or Don't have enough data.</li>
+                </ul>
+            </div>
+            <button id="close-modal">Roger</button>
+        </div>
+    </div>
+    
     <div id="radar">
         <div id="map-container">
             <div class="map-background"></div>
             <img id="map" src="map.png" alt="Game Map">
         </div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html>

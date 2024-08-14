@@ -5,6 +5,71 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
+    font-family: 'Roboto', sans-serif;
+}
+
+#info-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.modal-content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.controls, .information {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.controls strong, .information strong {
+    font-size: 18px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.controls ul, .information ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.controls li, .information li {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
 
 #radar {
@@ -13,15 +78,15 @@ body {
 
 #map-container {
     position: relative;
-    overflow: hidden; /* Ensure any overflow is hidden */
+    overflow: hidden;
 }
 
 #map {
     display: block;
-    border: 2px solid black; /* Add black border to map */
-    background-color: black; /* Set background color to black */
+    border: 2px solid black;
+    background-color: black;
     position: relative;
-    z-index: 1; /* Ensure map is on top of background */
+    z-index: 1;
 }
 
 .map-background {
@@ -31,23 +96,26 @@ body {
     width: 100%;
     height: 100%;
     background-color: black;
-    z-index: 0; /* Ensure background is behind the map */
+    z-index: 0;
 }
 
 .line {
     position: absolute;
-    height: 4px;
-    background-color: yellow; /* Change line color to yellow */
+    height: 6px;
+    background-color: yellow;
     transform-origin: top left;
-    z-index: 2; /* Ensure line is above background */
+    z-index: 2;
 }
 
 .heading {
     position: absolute;
     background-color: white;
-    padding: 2px 5px;
-    border: 1px solid black;
-    border-radius: 3px;
+    padding: 10px 15px;
+    border: 2px solid black;
+    border-radius: 15px;
     transform: translate(-50%, -50%);
-    z-index: 3; /* Ensure heading is above everything */
+    z-index: 3;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
 }
